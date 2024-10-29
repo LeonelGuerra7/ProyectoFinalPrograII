@@ -8,7 +8,6 @@
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
@@ -23,14 +22,20 @@
         android:theme="@style/Theme.ProyectoFinalPrograII"
         tools:targetApi="31">
         <activity
-            android:name=".AgregarPlatilloActivity"
+
+            android:name=".activity.PlatillosGuardadosActivity"
             android:exported="false"
             android:theme="@style/Theme.ProyectoFinalPrograII" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.AgregarPlatilloActivity"
+            android:exported="false"
+            android:theme="@style/Theme.ProyectoFinalPrograII" />
+        <activity
+            android:name=".activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

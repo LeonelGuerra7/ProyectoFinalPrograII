@@ -1,31 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondoagregar"> <!-- Aquí se agrega el fondo -->
+    android:background="@drawable/fondoagregar">
 
     <EditText
         android:id="@+id/editTextNombre"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:layout_marginTop="52dp"
+        android:backgroundTint="#D3D3D3"
         android:hint="Nombre del Platillo"
+        android:padding="12dp"
+        android:textColor="#000000"
+        android:textColorHint="#757575"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@id/imageViewPlatillo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.3" />
 
     <ImageView
         android:id="@+id/imageViewPlatillo"
         android:layout_width="0dp"
         android:layout_height="200dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="80dp"
         android:scaleType="centerCrop"
         android:src="@android:drawable/ic_menu_camera"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/editTextNombre" />
 
@@ -33,19 +40,35 @@
         android:id="@+id/buttonTomarFoto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#FFA500"
+        android:paddingHorizontal="24dp"
         android:text="Tomar Foto"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imageViewPlatillo" />
+
+    <!-- EditText para Descripción del Platillo -->
+    <!-- Aquí se asegura la restricción superior -->
+
+    <!-- Botón para Guardar Platillo con estilo azul lapislázuli -->
+
+    <!-- Botón para Salir al Inicio con estilo rojo oscuro -->
 
     <EditText
         android:id="@+id/editTextDescripcion"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="36dp"
+        android:backgroundTint="#D3D3D3"
         android:hint="Descripción"
+        android:padding="12dp"
+        android:textColor="#000000"
+        android:textColorHint="#757575"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/buttonTomarFoto" />
@@ -54,10 +77,28 @@
         android:id="@+id/buttonGuardarPlatillo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="#26619C"
+        android:paddingHorizontal="24dp"
         android:text="Guardar Platillo"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@id/btnSalirPrincipal"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editTextDescripcion" />
+
+    <Button
+        android:id="@+id/btnSalirPrincipal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="#FF5722"
+        android:paddingHorizontal="24dp"
+        android:text="Salir al Inicio"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/buttonGuardarPlatillo"
         app:layout_constraintTop_toBottomOf="@id/editTextDescripcion" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

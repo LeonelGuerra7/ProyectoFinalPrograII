@@ -6,33 +6,36 @@ import android.graphics.Bitmap;
 import java.io.Serializable;
 
 import android.graphics.Bitmap;
-import java.io.Serializable;
 
+import androidx.room.Entity;
+
+import java.io.Serializable;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+@Entity(tableName = "platillos")
 public class Platillo implements Serializable {
-    private int id;              // ID del platillo
-    private String nombre;       // Nombre del platillo
-    private String descripcion;  // Descripción del platillo
-    private Bitmap imagen;       // Imagen del platillo
-    private String imagenUri;    // URI de la imagen del platillo (opcional)
+    @PrimaryKey(autoGenerate = true)
+    private int id; // ID del platillo
+    private String nombre; // Nombre del platillo
+    private String descripcion; // Descripción del platillo
+    private String imagenUri; // URI de la imagen del platillo
 
     // Constructor vacío
-    public Platillo() {
-    }
+    public Platillo() {}
 
     // Constructor que inicializa todos los atributos
-    public Platillo(int id, String nombre, String descripcion, Bitmap imagen, String imagenUri) {
+    public Platillo(int id, String nombre, String descripcion, String imagenUri) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.imagen = imagen;
         this.imagenUri = imagenUri; // Inicializamos la URI
     }
 
     // Constructor para inicializar solo nombre, descripción e imagen
-    public Platillo(String nombre, String descripcion, Bitmap imagen) {
+    public Platillo(String nombre, String descripcion, String imagenUri) {
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.imagen = imagen;
+        this.imagenUri = imagenUri; // Aquí se guarda la ruta
     }
 
     // Getters
@@ -46,10 +49,6 @@ public class Platillo implements Serializable {
 
     public String getDescripcion() {
         return descripcion;
-    }
-
-    public Bitmap getImagen() {
-        return imagen;
     }
 
     public String getImagenUri() {
@@ -67,10 +66,6 @@ public class Platillo implements Serializable {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public void setImagen(Bitmap imagen) {
-        this.imagen = imagen;
     }
 
     public void setImagenUri(String imagenUri) {

@@ -32,10 +32,20 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    viewBinding {
+        var enabled = true
+    }
 }
 
 dependencies {
 
+    implementation(libs.room.runtime)
+    implementation(libs.room.common)
+    implementation(libs.recyclerview)
+    annotationProcessor(libs.room.compiler)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.ext.junit)
+    androidTestImplementation(libs.espresso.core)
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)

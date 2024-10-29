@@ -2,4 +2,9 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+        <color name="orange">#FFA500</color> <!-- Color anaranjado para "Tomar Foto" -->
+        <color name="lapis_blue">#26619C</color> <!-- Color azul lapislázuli para "Guardar Platillo" -->
+
+
 </resources>

@@ -1,31 +1,33 @@
-package gt.edu.umg.proyectofinalprograii;
+package gt.edu.umg.proyectofinalprograii.activity;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.Manifest;
-
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.Environment;
 import android.provider.MediaStore;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
-import gt.edu.umg.proyectofinalprograii.databinding.ActivityAgregarPlatilloBinding;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import gt.edu.umg.proyectofinalprograii.Platillo;
+import gt.edu.umg.proyectofinalprograii.R;
+import gt.edu.umg.proyectofinalprograii.dataBase.entity.sqlDatabase;
 
 public class AgregarPlatilloActivity extends AppCompatActivity {
 
@@ -33,18 +35,25 @@ public class AgregarPlatilloActivity extends AppCompatActivity {
     private static final int REQUEST_CAMERA_PERMISSION = 100;
     private EditText editTextNombre, editTextDescripcion;
     private ImageView imageViewPlatillo;
-    private Bitmap imagenPlatillo;
+    private Bitmap imagenPlatillo; // Mantener el Bitmap solo para mostrar la imagen
+    private String imagenUri; // URI de la imagen
+    private sqlDatabase db; // Instancia de la base de datos
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agregar_platillo);
 
+        // Inicializar vistas
         editTextNombre = findViewById(R.id.editTextNombre);
         editTextDescripcion = findViewById(R.id.editTextDescripcion);
         imageViewPlatillo = findViewById(R.id.imageViewPlatillo);
         Button buttonTomarFoto = findViewById(R.id.buttonTomarFoto);
         Button buttonGuardarPlatillo = findViewById(R.id.buttonGuardarPlatillo);
+        Button buttonSalirPrincipal = findViewById(R.id.btnSalirPrincipal);
+
+        // Inicializar la base de datos
+        db = sqlDatabase.getDatabase(this);
 
         // Botón para tomar una foto
         buttonTomarFoto.setOnClickListener(v -> {
@@ -59,10 +68,33 @@ public class AgregarPlatilloActivity extends AppCompatActivity {
         buttonGuardarPlatillo.setOnClickListener(v -> {
             String nombre = editTextNombre.getText().toString();
             String descripcion = editTextDescripcion.getText().toString();
-            Platillo nuevoPlatillo = new Platillo(nombre, descripcion, imagenPlatillo);
-            Intent resultIntent = new Intent();
-            resultIntent.putExtra("newPlatillo", nuevoPlatillo);
-            setResult(RESULT_OK, resultIntent);
+
+            // Verifica que los campos no estén vacíos
+            if (nombre.isEmpty() || descripcion.isEmpty() || imagenUri == null) {
+                Toast.makeText(this, "Por favor, completa todos los campos y toma una foto.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // Crear un nuevo platillo usando la URI de la imagen
+            Platillo nuevoPlatillo = new Platillo(nombre, descripcion, imagenUri);
+
+            // Insertar el platillo en la base de datos en un hilo separado
+            new Thread(() -> {
+                db.platilloDao().insertar(nuevoPlatillo);
+                runOnUiThread(() -> {
+                    Toast.makeText(AgregarPlatilloActivity.this, "Platillo guardado correctamente.", Toast.LENGTH_SHORT).show();
+                    Intent resultIntent = new Intent();
+                    resultIntent.putExtra("newPlatillo", nuevoPlatillo);
+                    setResult(RESULT_OK, resultIntent);
+                    finish();
+                });
+            }).start();
+        });
+
+        // Botón para regresar a MainActivity
+        buttonSalirPrincipal.setOnClickListener(v -> {
+            Intent intent = new Intent(AgregarPlatilloActivity.this, MainActivity.class);
+            startActivity(intent);
             finish();
         });
     }
@@ -113,6 +145,25 @@ public class AgregarPlatilloActivity extends AppCompatActivity {
             Bundle extras = data.getExtras();
             imagenPlatillo = (Bitmap) extras.get("data");
             imageViewPlatillo.setImageBitmap(imagenPlatillo);
+
+            // Guardar la imagen y obtener su URI
+            imagenUri = guardarImagen(imagenPlatillo);
+        }
+    }
+
+    private String guardarImagen(Bitmap bitmap) {
+        try {
+            File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+            File imageFile = new File(storageDir, "platillo_" + System.currentTimeMillis() + ".jpg");
+
+            FileOutputStream fos = new FileOutputStream(imageFile);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            fos.close();
+
+            return Uri.fromFile(imageFile).toString(); // Retorna la URI como String
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }

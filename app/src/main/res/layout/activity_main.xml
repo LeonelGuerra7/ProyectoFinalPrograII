@@ -1,31 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:background="@drawable/inicio"
+    tools:context=".activity.MainActivity">
 
-    <TextView
-        android:id="@+id/locationTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Obteniendo_ubicación..."
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/btnAgregarPlatillo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Agregar Nuevo Platillo"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/locationTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Obteniendo ubicación..."
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/btnAgregarPlatillo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.3" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/btnAgregarPlatillo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="208dp"
+            android:backgroundTint="#26619c"
+            android:text="Agregar Nuevo Platillo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/locationTv" />
+
+        <Button
+            android:id="@+id/btnPlatillosGuardados"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="#FF4500"
+            android:text="Platillos Guardados"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnAgregarPlatillo" />
+
+        <Button
+            android:id="@+id/buttonIntegrantes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Integrantes"
+            android:backgroundTint="#FFA500"
+            android:layout_marginTop="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnPlatillosGuardados" />
+
+        <LinearLayout
+            android:id="@+id/linearLayoutIntegrantes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:padding="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/buttonIntegrantes"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="#FF5722"
+                android:padding="8dp">
+
+                <ImageView
+                    android:id="@+id/imageViewLeonel"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:src="@drawable/leonel"
+                    android:scaleType="centerCrop"/>
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/textViewLeonel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Leonel Andres Guerra Godoy\nCarné: 0905-23-3929"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:layout_marginBottom="16dp"/>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="#FF5722"
+                android:padding="8dp">
+
+                <ImageView
+                    android:id="@+id/imageViewBene"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:src="@drawable/bene"
+                    android:scaleType="centerCrop"/>
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/textViewBene"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Benedicto de Jesús Martinez Martinez\nCarné: 0905-23-10445"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"/>
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
