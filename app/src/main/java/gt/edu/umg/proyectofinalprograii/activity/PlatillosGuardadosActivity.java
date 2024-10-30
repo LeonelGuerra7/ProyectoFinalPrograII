@@ -33,13 +33,8 @@ public class PlatillosGuardadosActivity extends AppCompatActivity {
         // Inicializar la base de datos
         db = sqlDatabase.getDatabase(this);
 
-        // Crear una lista de platillos manualmente
+        // Crear una lista de platillos desde la base de datos
         List<Platillo> platillos = new ArrayList<>();
-        // Agregar platillos de prueba manualmente
-        platillos.add(new Platillo("Prueba", "carros", "android.resource://" + getPackageName() + "/drawable/pruebaa"));
-        platillos.add(new Platillo("Prueba 2", "computadora", "android.resource://" + getPackageName() + "/drawable/pruebaa2"));
-
-        // Manejo de errores al listar platillos
         try {
             List<Platillo> platillosDb = db.platilloDao().listarTodos();
             if (platillosDb != null && !platillosDb.isEmpty()) {
@@ -66,3 +61,4 @@ public class PlatillosGuardadosActivity extends AppCompatActivity {
         binding.buttonSalir.setOnClickListener(v -> finish());
     }
 }
+

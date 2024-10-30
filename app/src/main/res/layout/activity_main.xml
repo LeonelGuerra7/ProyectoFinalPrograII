@@ -23,7 +23,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.3" />
+            app:layout_constraintVertical_bias="0.75" />
 
         <Button
             android:id="@+id/btnAgregarPlatillo"
@@ -117,7 +117,7 @@
                 android:gravity="center"
                 android:textSize="16sp"
                 android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"/>
+                android:layout_marginBottom="16dp"/>
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

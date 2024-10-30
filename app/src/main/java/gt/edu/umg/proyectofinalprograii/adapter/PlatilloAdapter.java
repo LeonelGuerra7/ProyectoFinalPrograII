@@ -38,14 +38,6 @@ public class PlatilloAdapter extends RecyclerView.Adapter<PlatilloAdapter.Platil
     public void onBindViewHolder(@NonNull PlatilloViewHolder holder, int position) {
         Platillo platillo = platillos.get(position);
 
-        // Cargar la imagen desde la URI
-        if (platillo.getImagenUri() != null) {
-            holder.imagenPlatillo.setImageURI(Uri.parse(platillo.getImagenUri()));
-        } else {
-            // Si no hay imagen, mostrar una imagen por defecto
-            holder.imagenPlatillo.setImageResource(R.drawable.pruebaa); // Cambia a pruebaa2 si lo deseas
-        }
-
         holder.nombrePlatillo.setText(platillo.getNombre());
         holder.descripcionPlatillo.setText(platillo.getDescripcion());
     }
@@ -56,13 +48,11 @@ public class PlatilloAdapter extends RecyclerView.Adapter<PlatilloAdapter.Platil
     }
 
     public static class PlatilloViewHolder extends RecyclerView.ViewHolder {
-        ImageView imagenPlatillo;
         TextView nombrePlatillo;
         TextView descripcionPlatillo;
 
         public PlatilloViewHolder(@NonNull View itemView) {
             super(itemView);
-            imagenPlatillo = itemView.findViewById(R.id.imagenPlatillo);
             nombrePlatillo = itemView.findViewById(R.id.nombrePlatillo);
             descripcionPlatillo = itemView.findViewById(R.id.descripcionPlatillo);
         }
